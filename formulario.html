@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Formulario de Contacto - AutoSelect</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    :root {
+        --gold: #DDA853;
+        --blue-dark: #0D1B2A;
+        --blue-mid: #1B263B;
+        --blue-light: #415A77;
+        --gray: #CCCCCC;
+        --white: #FFFFFF;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: var(--white);
+        color: var(--blue-dark);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 30px;
+        transition: 0.3s;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 600px;
+        background: var(--white);
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0px 5px 18px rgba(0,0,0,0.15);
+        border-top: 6px solid var(--gold);
+        transition: 0.3s;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 28px;
+        color: var(--blue-mid);
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 15px;
+        display: block;
+    }
+
+    .input-box {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: 1px solid var(--gray);
+        margin-top: 5px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .input-box:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 8px rgba(221,168,83,0.4);
+    }
+
+    textarea {
+        height: 130px;
+        resize: none;
+    }
+
+    .btn {
+        width: 100%;
+        background: var(--gold);
+        border: none;
+        padding: 15px;
+        margin-top: 25px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: var(--blue-dark);
+    }
+
+    .btn:hover {
+        background: var(--blue-light);
+        color: var(--white);
+    }
+
+    .toggle-dark {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 18px;
+        background: var(--blue-dark);
+        color: var(--white);
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: 0.3s;
+    }
+
+    /* Dark Mode */
+    body.dark {
+        background: #0a0f16;
+        color: #e5e5e5;
+    }
+    body.dark .container {
+        background: #111a25;
+        color: #eee;
+        border-color: var(--gold);
+    }
+    body.dark .input-box {
+        background: #1b2735;
+        border-color: #555;
+        color: #eee;
+    }
+    body.dark .btn {
+        background: var(--gold);
+        color: #111;
+    }
+</style>
+</head>
+<body>
+
+<button class="toggle-dark" id="darkBtn"><i class="fa-solid fa-moon"></i> Modo oscuro</button>
+
+<div class="container">
+    <h2><i class="fa-solid fa-envelope"></i> Solicitar Información</h2>
+
+    <form>
+        <label><i class="fa-solid fa-user"></i> Nombre completo</label>
+        <input type="text" class="input-box" placeholder="Escribe tu nombre" required>
+
+        <label><i class="fa-solid fa-building"></i> Empresa</label>
+        <input type="text" class="input-box" placeholder="Nombre de tu empresa">
+
+        <label><i class="fa-solid fa-at"></i> Correo electrónico</label>
+        <input type="email" class="input-box" placeholder="correo@ejemplo.com" required>
+
+        <label><i class="fa-solid fa-phone"></i> Teléfono</label>
+        <input type="text" class="input-box" placeholder="Número de contacto">
+
+        <label><i class="fa-solid fa-message"></i> Mensaje</label>
+        <textarea class="input-box" placeholder="Escribe tu consulta..." required></textarea>
+
+        <button class="btn"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button>
+    </form>
+</div>
+
+<script>
+    const darkBtn = document.getElementById("darkBtn");
+    darkBtn.addEventListener("click", ()=>{
+        document.body.classList.toggle("dark");
+    });
+</script>
+
+</body>
+</html>

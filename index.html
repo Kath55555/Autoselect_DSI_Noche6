@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>AutoSelect - Reclutamiento Inteligente</title>
+
+<!-- ======================= ESTILOS ======================= -->
+<style>
+    :root {
+        --gold: #DDA853;
+        --blue-dark: #0D1B2A;
+        --blue-mid: #1B263B;
+        --blue-light: #415A77;
+        --gray-light: #E5E5E5;
+        --white: #FFFFFF;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: var(--white);
+        color: var(--blue-dark);
+        scroll-behavior: smooth;
+    }
+
+    /* ======================= NAVBAR ======================= */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(13, 27, 42, 0.9);
+        backdrop-filter: blur(8px);
+        padding: 20px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .navbar a {
+        color: var(--white);
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 17px;
+    }
+
+    .navbar .btn-nav {
+        background: var(--gold);
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: var(--blue-dark);
+        font-weight: bold;
+    }
+
+    /* ======================= HERO ======================= */
+    .hero {
+        background: linear-gradient(135deg, var(--blue-light), var(--blue-mid));
+        padding: 140px 20px 120px 20px;
+        text-align: center;
+        color: white;
+    }
+
+    .hero img {
+        width: 350px;
+        filter: drop-shadow(0 0 12px rgba(0,0,0,0.4));
+    }
+
+    .hero h1 {
+        font-size: 42px;
+        margin-top: 15px;
+    }
+
+    .hero .cta {
+        margin-top: 25px;
+        display: inline-block;
+        background: var(--gold);
+        color: var(--blue-dark);
+        padding: 15px 25px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /* ======================= SECCIONES ======================= */
+    .section {
+        padding: 140px 10%;
+    }
+
+    .title {
+        font-size: 34px;
+        border-left: 8px solid var(--gold);
+        padding-left: 15px;
+        margin-bottom: 30px;
+        color: var(--blue-mid);
+    }
+
+    /* GRID */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0px 4px 14px rgba(0,0,0,0.1);
+        border-top: 6px solid var(--gold);
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+    }
+
+    /* ======================= CARROUSEL ======================= */
+    .carousel {
+        width: 60%;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        border-radius: 15px;
+        border: 4px solid var(--gold);
+        box-shadow: 0px 5px 12px rgba(0,0,0,0.3);
+    }
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+    width: 300%;              /* ANCHO REAL SEGÚN CANTIDAD DE IMÁGENES */
+}
+
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--gold);
+        border: none;
+        padding: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    /* ======================= FOOTER ======================= */
+    footer {
+        background: var(--blue-dark);
+        color: var(--gray-light);
+        padding: 40px;
+        text-align: center;
+        margin-top: 60px;
+    }
+
+
+.fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+</style>
+</head>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const elements = document.querySelectorAll(".fade");
+
+    function fadeInElements() {
+        elements.forEach(el => {
+            const rect = el.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            if (rect < windowHeight - 50) {
+                el.classList.add("visible");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", fadeInElements);
+    fadeInElements(); // Llamar al cargar
+});
+</script>
+
+
+
+<body>
+
+<!-- ======================= NAVBAR ======================= -->
+<div class="navbar">
+    <div style="font-size: 22px; font-weight: bold; color: var(--gold);">AutoSelect</div>
+    <div>
+        <a href="#inicio">Inicio</a>
+        <a href="#quees">¿Qué es?</a>
+        <a href="#funciona">Cómo funciona</a>
+        <a href="#Beneficios">Beneficios</a>
+        <a href="#planes">Planes</a>
+        <a href="#contacto">Contacto</a>
+        <a class="btn-nav" href="https://drive.google.com/file/d/1m3GoSpzUU5-0xpLlqVuOlpSoLce-Mw-3/view?usp=sharing">Descargar Demo</a>
+
+    </div>
+</div>
+
+<!-- ========================= HERO ========================= -->
+<section class="hero" id="inicio">
+    <img src="autoselect.png" alt="Logo AutoSelect">
+    <h1>Analítica inteligente para elegir al mejor talento</h1>
+    <a class="cta" href="#quees">Conoce más</a>
+</section>
+
+<!-- ========================= SECCIONES ========================= -->
+<section class="section" id="quees" style="text-align:center;">
+    <h2 class="title">El Desafío Actual del Reclutamiento</h2>
+
+    <p style="max-width:800px; margin:auto; font-size:18px; margin-bottom:40px;">
+        El área de RRHH enfrenta sobrecarga de información, procesos lentos y la falta de herramientas que permitan tomar decisiones basadas en datos. 
+        La revisión manual de CVs afecta tiempos, calidad y experiencia del candidato.
+    </p>
+
+    <div class="grid" style="max-width:950px; margin:auto; gap:30px;">
+        <div class="card" style="padding:25px;">
+            <h3>📥 Volumen Excesivo</h3>
+            <p>Procesos que reciben más de 500 CVs se vuelven insostenibles.</p>
+        </div>
+
+        <div class="card" style="padding:25px;">
+            <h3>🚫 Falta de Estandarización</h3>
+            <p>Cada CV tiene un formato diferente, lo que complica aún más la selección.</p>
+        </div>
+
+        <div class="card" style="padding:25px;">
+            <h3>🔍 Poca Visibilidad</h3>
+            <p>No existen métricas claras ni comparativas entre candidatos.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="text-align:center;">
+    <h2 class="title">AutoSelect: La Solución Inteligente</h2>
+
+    <p style="max-width:800px; margin:auto; font-size:18px; margin-bottom:40px;">
+        Nuestra herramienta automatiza la lectura, análisis y filtrado de CVs a gran escala, permitiendo a los equipos de selección enfocarse en lo realmente importante: encontrar talento.
+    </p>
+
+    <div class="grid" style="max-width:950px; margin:auto; gap:30px;">
+        <div class="card" style="padding:25px;">
+            <h3>⚡ Automatización Total</h3>
+            <p>Sube carpetas completas y obtén resultados inmediatos.</p>
+        </div>
+
+        <div class="card" style="padding:25px;">
+            <h3>📊 Analítica Avanzada</h3>
+            <p>Convierte CVs en datos comparables y exportables.</p>
+        </div>
+
+        <div class="card" style="padding:25px;">
+            <h3>🎯 Selección Inteligente</h3>
+            <p>Filtros personalizados que reducen drásticamente el tiempo de selección.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="section" id="funciona">
+    <h2 class="title">¿Cómo Funciona AutoSelect?</h2>
+    <div class="grid">
+        <div class="card"><h3>📁 1. Carga de CVs</h3><p>Sube una carpeta con PDFs o Word.</p></div>
+        <div class="card"><h3>🔎 2. Extracción</h3><p>Detecta datos clave del CV automáticamente.</p></div>
+        <div class="card"><h3>🎯 3. Filtros</h3><p>Filtra según profesión, distrito, experiencia.</p></div>
+        <div class="card"><h3>📊 4. Excel Final</h3><p>Reporte limpio para decidir rápido.</p></div>
+        <div class="card"><h3>🔽 5. Reubica Archivos</h3><p>Mueve los CV seleccionados a una carpeta individual .</p></div>
+    </div>
+</section>
+
+<section class="section" id="Beneficios">
+    <h2 class="title">Beneficios</h2>
+    <div class="grid">
+        <div class="card"><h3>📊 Decisiones basadas en datos</h3><p>Utiliza métricas objetivas para seleccionar talento.</p></div>
+        <div class="card"><h3>📈 Visión analítica</h3><p>Identifica patrones, tendencias y oportunidades.</p></div>
+        <div class="card"><h3>⚡ Agilidad total</h3><p>Acelera el proceso de reclutamiento hasta un 70%.</p></div>
+    </div>
+</section>
+
+<!-- ========================= PLANES ========================= -->
+<section class="section" id="planes">
+    <h2 class="title">Planes Comerciales</h2>
+
+    <div class="grid">
+
+        <!-- PLAN MYPE -->
+        <div class="card">
+            <h3>🔹 MYPE</h3>
+            <p>
+                Ideal para pequeños negocios y reclutadores independientes. 
+                Automatiza tus procesos sin complejidad ni altos costos.
+                <br><br>
+                <strong>Incluye:</strong>
+                <ul style="text-align:left; line-height:1.6;">
+                    <li>✔ Procesamiento de hasta <strong>50 CVs</strong> por carga</li>
+                    <li>✔ Filtros esenciales: profesión, distrito, experiencia</li>
+                    <li>✔ Exportación básica a Excel</li>
+                    <li>✔ Interfaz rápida y sencilla de usar</li>
+                </ul>
+            </p>
+        </div>
+
+        <!-- PLAN EMPRESA -->
+        <div class="card">
+            <h3>🔹 Empresa</h3>
+            <p>
+                Perfecto para empresas medianas con alto volumen de procesos. 
+                Ofrece mayor capacidad y herramientas de análisis.
+                <br><br>
+                <strong>Incluye:</strong>
+                <ul style="text-align:left; line-height:1.6;">
+                    <li>✔ Procesamiento de hasta <strong>1,000 CVs</strong> por carga</li>
+                    <li>✔ Filtros avanzados: palabras clave, habilidades, estudios</li>
+                    <li>✔ Reportes premium (Excel + PDF)</li>
+                    <li>✔ Soporte priorizado</li>
+                </ul>
+            </p>
+        </div>
+
+        <!-- PLAN CONSULTORÍA -->
+        <div class="card">
+            <h3>🔹 Consultoría</h3>
+            <p>
+                Pensado para consultoras y corporaciones que requieren capacidades
+                ilimitadas y funciones a nivel profesional.
+                <br><br>
+                <strong>Incluye:</strong>
+                <ul style="text-align:left; line-height:1.6;">
+                    <li>✔ Procesamiento <strong>ilimitado</strong> de CVs</li>
+                    <li>✔ Filtros personalizados por cada cliente</li>
+                    <li>✔ Analítica avanzada y dashboards</li>
+                    <li>✔ Capacitación + soporte 24/7</li>
+                </ul>
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ========================= CONTACTO ========================= -->
+
+<section class="section" id="contacto" style="padding:120px 10%; background:#0D1B2A; color:white;">
+
+    <h2 class="title" style="color:#DDA853; margin-bottom:40px;">Contacto</h2>
+
+    <!-- Tarjetas de información -->
+    <div style="
+        max-width:900px;
+        margin:auto;
+        display:grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap:30px;
+    ">
+
+        <!-- Card 1 -->
+        <div class="fade" style="
+            background:#1B263B;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.35);
+            text-align:center;
+            transition:0.8s;
+        ">
+            <i class="fa-solid fa-envelope" style="font-size:40px; color:#DDA853;"></i>
+            <h3 style="margin-top:15px;">📧Correo</h3>
+            <p>autoselect.team1@gmail.com</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="fade" style="
+            background:#1B263B;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.35);
+            text-align:center;
+            transition:0.8s;
+        ">
+            <i class="fa-solid fa-phone" style="font-size:40px; color:#DDA853;"></i>
+            <h3 style="margin-top:15px;">📞Teléfono</h3>
+            <p>+51 933 766 549</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="fade" style="
+            background:#1B263B;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.35);
+            text-align:center;
+            transition:0.8s;
+        ">
+            <i class="fa-solid fa-clock" style="font-size:40px; color:#DDA853;"></i>
+            <h3 style="margin-top:15px;">⏰Horario</h3>
+            <p>Lunes a Viernes<br>9:00 AM - 6:00 PM</p>
+        </div>
+
+    </div>
+
+    <!-- Botón principal -->
+    <a href="formulario.html"
+       style="padding: 16px 34px;
+              font-size: 20px;
+              display: inline-block;
+              margin-top: 40px;
+              text-decoration: none;
+              border-radius: 12px;
+              background-color: #DDA853;
+              color: #0D1B2A;
+              font-weight:bold;
+              box-shadow: 0 4px 14px rgba(221,168,83,0.35);">
+        Llenar Formulario
+    </a>
+
+    <!-- Botón secundario -->
+    <br><br>
+    <a href="https://wa.me/51933766549" target="_blank"
+       style="padding: 12px 28px;
+              font-size: 18px;
+              text-decoration: none;
+              border-radius: 12px;
+              background-color: #415A77;
+              color: #FFF;
+              display:inline-block;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.35);">
+        📲 Contactar por WhatsApp
+    </a>
+
+</section>
+
+
+
+
+<!-- ========================= FOOTER ========================= -->
+<footer>
+    © 2025 AutoSelect — Semana Tecnológica - Analitica de Datos
+</footer>
+
+<!-- ========================= SCRIPT DEL CARROUSEL ========================= -->
+<script>
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let index = 0;
+
+    function update() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+        index = (index + 1) % slides.length;
+        update();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        index = (index - 1 + slides.length) % slides.length;
+        update();
+    });
+</script>
+
+</body>
+</html>
+
